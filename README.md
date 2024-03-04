@@ -7,13 +7,13 @@ Bu basit web uygulaması, kullanıcı ekleme, listeleme, güncelleme ve silme i�
 1. Bu projeyi klonlayın:
 
     ```bash
-    git clone <[repository_link](https://github.com/k-celal/mongo-db-crud-transaction-flask-api/)>
+    git clone [repository_link](https://github.com/k-celal/mongo-db-crud-transaction-flask-api/)
     ```
 
 2. Proje dizinine gidin:
 
     ```bash
-    cd UserManagementSystem
+    cd mongo-db-crud-transaction-flask-api
     ```
 
 3. Gerekli Python paketlerini yükleyin:
@@ -21,7 +21,6 @@ Bu basit web uygulaması, kullanıcı ekleme, listeleme, güncelleme ve silme i�
     ```bash
     pip install -r requirements.txt
     ```
-
 4. MongoDB veritabanında `UserData` adında bir veritabanı oluşturun ve içine `Users` adında bir koleksiyon ekleyin. 
 
 5. Flask uygulamasını başlatın:
