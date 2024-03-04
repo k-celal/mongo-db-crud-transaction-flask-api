@@ -7,7 +7,7 @@ Bu basit web uygulaması, kullanıcı ekleme, listeleme, güncelleme ve silme i�
 1. Bu projeyi klonlayın:
 
     ```bash
-    git clone <repository_link>
+    git clone <[repository_link](https://github.com/k-celal/mongo-db-crud-transaction-flask-api/)>
     ```
 
 2. Proje dizinine gidin:
