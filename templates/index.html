@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        button.delete-button, button.update-button {
+            position: absolute;
+            right: 0;
+            margin-left: 10px;
+        }
+
+        button.delete-button {
+            background-color: #dc3545;
+        }
+
+        button.update-button {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Management System</h1>
+    <h2>Add User</h2>
+    <form id="add-user-form">
+        <label for="user-id">User ID:</label>
+        <input type="text" id="user-id" name="user_id" required><br>
+        <label for="user-name">User Name:</label>
+        <input type="text" id="user-name" name="user_name" required><br>
+        <button type="submit">Add User</button>
+    </form>
+
+    <h2>Users</h2>
+    <ul id="user-list"></ul>
+        <script>
+            document.getElementById("add-user-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                var userId = document.getElementById("user-id").value;
+                var userName = document.getElementById("user-name").value;
+    
+                fetch("/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "_id": userId,
+                        "user_name": userName
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    document.getElementById("user-id").value = "";
+                    document.getElementById("user-name").value = "";
+                    fetchUsers();
+                })
+                .catch(error => console.error("Error:", error));
+            });
+    
+            function fetchUsers() {
+                fetch("/users")
+                .then(response => response.json())
+                .then(users => {
+                    var userList = document.getElementById("user-list");
+                    userList.innerHTML = "";
+                    users.forEach(user => {
+                        var li = document.createElement("li");
+                        li.textContent = "User ID: " + user._id + ", User Name: " + user.user_name;
+                        
+                        // Sil butonu
+                        var deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.onclick = function() {
+                            deleteUser(user._id);
+                        };
+                        li.appendChild(deleteButton);
+    
+                        // Güncelle butonu
+                        var updateButton = document.createElement("button");
+                        updateButton.textContent = "Update";
+                        updateButton.onclick = function() {
+                            var newName = prompt("Enter new name:");
+                            if (newName) {
+                                updateUser(user._id, newName);
+                            }
+                        };
+                        li.appendChild(updateButton);
+    
+                        userList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error("Error:", error));
+            }
+    
+            function deleteUser(userId) {
+                fetch("/users", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "_id": userId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchUsers();
+                })
+                .catch(error => console.error("Error:", error));
+            }
+    
+            function updateUser(userId, newName) {
+                fetch("/users", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "_id": userId,
+                        "user_name": newName
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchUsers();
+                })
+                .catch(error => console.error("Error:", error));
+            }
+    
+            fetchUsers();
+        </script>
+</body>
+</html>
+
+</body>
+</html>
