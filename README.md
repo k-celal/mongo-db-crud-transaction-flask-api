@@ -48,11 +48,5 @@ Bu basit web uygulaması, kullanıcı ekleme, listeleme, güncelleme ve silme i�
 
 - Flask: Web uygulaması oluşturmak için kullanılan Python web framework'ü.
 - MongoDB: NoSQL veritabanı olarak kullanılan MongoDB, kullanıcı verilerini saklamak için kullanılır.
-
-## Katkıda Bulunma
-
-Bu proje her türlü katkıya açıktır. Eğer bir hata bulursanız veya iyileştirme öneriniz varsa, lütfen bir Issue açın veya bir Pull Request gönderin.
-
-## Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için [LICENSE](LICENSE) dosyasına bakabilirsiniz.
+- 
+</Good coding with MuyuX 👨‍💻>
